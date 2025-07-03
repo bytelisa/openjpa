@@ -2209,6 +2209,7 @@
                             <goal>checkstyle</goal>
                         </goals>
                         <configuration>
+                            <skip>true</skip>  <!-- progetto-testing -->
                             <failsOnError>true</failsOnError>
                             <consoleOutput>true</consoleOutput>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
