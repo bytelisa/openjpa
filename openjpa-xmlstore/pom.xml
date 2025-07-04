@@ -98,7 +98,10 @@
                 <executions>
                     <execution>
                         <id>enhancer</id>
-                        <phase>process-test-classes</phase>
+                        <!-- progetto testing, disabilitato per build a seguito rimozione dei test-->
+                        <!--  <phase>process-test-classes</phase>-->
+                        <phase>none</phase>
+                        <!-- fine modifica -->
                         <goals>
                             <goal>test-enhance</goal>
                         </goals>
