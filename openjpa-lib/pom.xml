@@ -79,6 +79,33 @@
             <artifactId>jakarta.validation-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- progetto testing -->
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <!-- la versione non serve perché la prende dal dependencyManagement del genitore -->
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -112,7 +139,7 @@
                                         <equals arg1="${diff.state.cached}" arg2="1" />
                                     </or>
                                 </condition>
-                                
+
                                 <echo>Getting the 'GIT' revision value</echo>
                                 <exec outputproperty="git.revision" failonerror="false" failifexecutionfails="false" executable="git">
                                     <arg line="rev-parse --short=7 HEAD" />
@@ -132,9 +159,9 @@
                                 <mkdir dir="${outdir}/META-INF" />
 
                                 <echo file="${outdir}/META-INF/org.apache.openjpa.revision.properties">
-revision.number=${git.revision}${uncommitted.changes}
-openjpa.version=${project.version}
-openjpa.enhancer.revision=${pcenhancer.git.revision}${uncommitted.changes}
+                                    revision.number=${git.revision}${uncommitted.changes}
+                                    openjpa.version=${project.version}
+                                    openjpa.enhancer.revision=${pcenhancer.git.revision}${uncommitted.changes}
                                 </echo>
                             </target>
                         </configuration>
@@ -144,6 +171,7 @@ openjpa.enhancer.revision=${pcenhancer.git.revision}${uncommitted.changes}
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>
