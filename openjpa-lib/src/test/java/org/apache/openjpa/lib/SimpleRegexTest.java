@@ -21,12 +21,11 @@ package org.apache.openjpa.lib;
 
 import org.apache.openjpa.lib.util.SimpleRegex;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 
 
-public class TestSimpleRegex {
+public class SimpleRegexTest {
 
     @Test
     public void testCase1(){
@@ -78,16 +77,16 @@ public class TestSimpleRegex {
         SimpleRegex re = new SimpleRegex("Elisa.*.*", true);
         assertTrue(re.matches("eLISA"));
     }
-    @Test
-    public void testCase11(){
-        assertThrows(NullPointerException.class,
-                () -> {new SimpleRegex(null, true);});
-    }
-    @Test
-    public void testCase12(){
-        SimpleRegex re = new SimpleRegex(".*", false);
 
-        assertThrows(NullPointerException.class, () -> re.matches(null));
+    @Test(expected = NullPointerException.class)
+    public void testCase11() {
+        new SimpleRegex(null, true);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCase12() {
+        SimpleRegex re = new SimpleRegex(".*", false);
+        re.matches(null);
     }
 
 
