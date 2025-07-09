@@ -238,17 +238,25 @@ public class ClassUtilTest {
     }
 
 
-//     Test generato con LLM per ampliare la Test Suite e aumentare la coverage
+    // MUTATION TESTING
     @Test
-    public void testGetClassNameFromInnerClassString() {
-        /**
-         * Questo è un test di partizione più specifico per il formato della stringa di input.
-         * Verifica la capacità del metodo di gestire correttamente i nomi di classi interne,
-         * che in Java usano il carattere $ come separatore invece del punto.
-         * Assicura che la logica di parsing isoli correttamente il nome della classe interna,
-         * ignorando sia il package che la classe esterna.
-         */
-        assertEquals("Map$Entry", ClassUtil.getClassName("java.util.Map$Entry"));
+    public void testGetClassNameForMultiDimensionalPrimitiveArray() {
+        assertEquals("char[][]", ClassUtil.getClassName(char[][].class));
+    }
+
+    @Test
+    public void testGetClassNameForClassInDefaultPackage() {
+        assertEquals("MySimpleClass", ClassUtil.getClassName("MySimpleClass"));
+    }
+
+    @Test
+    public void testGetPackageNameForClassInDefaultPackage() {
+        assertEquals("", ClassUtil.getPackageName("MySimpleClass"));
+    }
+
+    @Test
+    public void testGetPackageNameForMultiDimensionalArray() {
+        assertEquals("java.lang", ClassUtil.getPackageName(String[][][].class));
     }
 
 

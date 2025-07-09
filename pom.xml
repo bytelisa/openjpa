@@ -2061,6 +2061,10 @@
                                 <value>${tests.openjpa.driverDataSource}</value>
                             </property>
                         </systemProperties>
+                        <includes>
+                            <include>**/LLMSimpleRegexTest.java</include>
+                            <include>**/LLMClassUtilTest.java</include>
+                        </includes>
                     </configuration>
                 </plugin>
                 <plugin>

@@ -89,6 +89,24 @@ public class SimpleRegexTest {
         re.matches(null);
     }
 
+    //MUTATION TESTING:
 
+    @Test
+    public void mutationTestForNegatedConditionalOnL100() {
+        SimpleRegex re = new SimpleRegex("a.*f", false);
+        assertFalse(re.matches("abcde"));
+    }
+
+    @Test
+    public void mutationTestForIntegerArithmeticOnL104() {
+        SimpleRegex re = new SimpleRegex("a.*c.*e", false);
+        assertTrue(re.matches("abcde"));
+    }
+
+    @Test
+    public void mutationTestForReturnValueOnL133() {
+        SimpleRegex re = new SimpleRegex("b", false);
+        assertFalse(re.matches("a_c"));
+    }
 
 }
