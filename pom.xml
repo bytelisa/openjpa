@@ -2062,8 +2062,16 @@
                             </property>
                         </systemProperties>
                         <includes>
-                            <include>**/LLMSimpleRegexTest.java</include>
-                            <include>**/LLMClassUtilTest.java</include>
+<!--                            my test suite-->
+<!--                            <include>**/SimpleRegexTest.java</include>-->
+<!--                            <include>**/ClassUtilTest.java</include>-->
+<!--                            LLM-->
+<!--                            <include>**/LLMSimpleRegexTest.java</include>-->
+<!--                            <include>**/LLMClassUtilTest.java</include>-->
+<!--                            Randoop-->
+                            <include>**/RegressionTest.java</include>
+                            <include>**/RegressionTest0.java</include>
+                            <include>**/RegressionTest1.java</include>
                         </includes>
                     </configuration>
                 </plugin>
@@ -2347,6 +2355,10 @@
                         <!-- generated content -->
                         <exclude>**/.*/**</exclude>
                         <exclude>**/target/**/*</exclude>
+<!--                        progetto testing: Randoop-->
+                        <exclude>**/RandoopTest.java</exclude>
+                        <exclude>**/RegressionTest*.java</exclude> <!-- Usa un pattern per coprire RegressionTest0, RegressionTest1 etc. -->
+                        <exclude>**/RandoopErrorTest.java</exclude>
                     </excludes>
                     <includes>
                         <!-- only check common source files -->
@@ -2376,12 +2388,23 @@
                 <version>1.9.0</version>
                 <configuration>
                     <targetClasses>
-                        <!-- Questo è un buon posto per definire le classi target
-                             se le conosci in anticipo, altrimenti le passeremo
-                             dalla riga di comando. -->
+                        <!-- classi target -->
+                        <param>org.apache.openjpa.lib.util.SimpleRegex</param>
+                        <param>org.apache.openjpa.lib.util.ClassUtil</param>
                     </targetClasses>
                     <targetTests>
                         <!-- Idem per le classi di test. -->
+                        test manuali
+                        <param>org.apache.openjpa.lib.SimpleRegexTest</param>
+                        <param>org.apache.openjpa.lib.ClassUtilTest</param>
+
+<!--                        test LLM-->
+                        <!--                        <param>org.apache.openjpa.lib.LLMSimpleRegexTest</param>-->
+                        <!--                        <param>org.apache.openjpa.lib.LLMClassUtilTest</param>-->
+                        <!--  test di Randoop -->
+<!--                        <param>RegressionTest</param>-->
+<!--                        <param>RegressionTest0</param>-->
+<!--                        <param>RegressionTest1</param>-->
                     </targetTests>
                 </configuration>
 
