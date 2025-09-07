@@ -2063,15 +2063,15 @@
                         </systemProperties>
                         <includes>
 <!--                            my test suite-->
-<!--                            <include>**/SimpleRegexTest.java</include>-->
+                            <include>**/SimpleRegexTest.java</include>
 <!--                            <include>**/ClassUtilTest.java</include>-->
 <!--                            LLM-->
 <!--                            <include>**/LLMSimpleRegexTest.java</include>-->
 <!--                            <include>**/LLMClassUtilTest.java</include>-->
 <!--                            Randoop-->
-                            <include>**/RegressionTest.java</include>
-                            <include>**/RegressionTest0.java</include>
-                            <include>**/RegressionTest1.java</include>
+<!--                            <include>**/RegressionTest.java</include>-->
+<!--                            <include>**/RegressionTest0.java</include>-->
+<!--                            <include>**/RegressionTest1.java</include>-->
                         </includes>
                     </configuration>
                 </plugin>
@@ -2393,8 +2393,7 @@
                         <param>org.apache.openjpa.lib.util.ClassUtil</param>
                     </targetClasses>
                     <targetTests>
-                        <!-- Idem per le classi di test. -->
-                        test manuali
+                        <!--test manuali -->
                         <param>org.apache.openjpa.lib.SimpleRegexTest</param>
                         <param>org.apache.openjpa.lib.ClassUtilTest</param>
 
@@ -2438,7 +2437,23 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <!-- Assicurati che la versione sia definita nel pom parente o qui -->
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+
         </plugins>
     </reporting>
+
+
 
 </project>

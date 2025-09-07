@@ -137,6 +137,107 @@ public class SimpleRegexTest {
         new SimpleRegex(null, true);
     }
 
+
+
+
+    /** ------------------------------- SECONDA ITERAZIONE -------------------------------**/
+
+    /**
+     * Test Index: 1
+     * Input: expr=".*", target="abc"
+     * Esito Atteso: true
+     * Motivazione: Testare la logica del backtracking quando non ci sono ancore letterali.
+     */
+    @Test
+    public void testMatches_ID1_StarWildcardMatchesAnyString() {
+        SimpleRegex regex = new SimpleRegex(".*", false);
+        assertTrue("Test ID 1: '.*' deve matchare 'abc'", regex.matches("abc"));
+    }
+
+    /**
+     * Test Index: 2
+     * Input: expr=".*", target=""
+     * Esito Atteso: true
+     * Motivazione: Testare la logica del backtracking quando non ci sono ancore letterali (match con stringa vuota).
+     */
+    @Test
+    public void testMatches_ID2_StarWildcardMatchesEmptyString() {
+        SimpleRegex regex = new SimpleRegex(".*", false);
+        assertTrue("Test ID 2: '.*' deve matchare una stringa vuota", regex.matches(""));
+    }
+
+    /**
+     * Test Index: 3
+     * Input: expr="ab.d", target="abcde"
+     * Esito Atteso: false
+     * Motivazione: Verifica la condizione di terminazione del ciclo principale (target più lungo dell'espressione).
+     */
+    @Test
+    public void testMatches_ID3_DotWildcardFailsOnLongerTarget() {
+        SimpleRegex regex = new SimpleRegex("ab.d", false);
+        assertFalse("Test ID 3: 'ab.d' non deve matchare 'abcde' perché il target è più lungo", regex.matches("abcde"));
+    }
+
+    /**
+     * Test Index: 4
+     * Input: expr="a.*c", target="abc"
+     * Esito Atteso: true
+     * Motivazione: Testa match di '.*' con 1 char (ex test 2) [NdR: probabilmente inteso come "diverso da test 2"].
+     */
+    @Test
+    public void testMatches_ID4_StarWildcardMatchesSingleCharBetweenLiterals() {
+        SimpleRegex regex = new SimpleRegex("a.*c", false);
+        assertTrue("Test ID 4: 'a.*c' deve matchare 'abc'", regex.matches("abc"));
+    }
+
+    /**
+     * Test Index: 5
+     * Input: expr="abc", target="aBc", caseInsensitive=true
+     * Esito Atteso: true
+     * Motivazione: Testa un successo in modalità case-insensitive che fallirebbe in modalità case-sensitive.
+     */
+    @Test
+    public void testMatches_ID5_CaseInsensitiveSuccess() {
+        SimpleRegex regex = new SimpleRegex("abc", true);
+        assertTrue("Test ID 5: 'abc' deve matchare 'aBc' in modalità case-insensitive", regex.matches("aBc"));
+    }
+
+    /**
+     * Test Index: 6
+     * Input: expr="a.*.*c", target="abbc"
+     * Esito Atteso: true
+     * Motivazione: Mancava l'adiacenza di due wildcard di lunghezza variabile.
+     */
+    @Test
+    public void testMatches_ID6_AdjacentStarWildcardsSuccess() {
+        SimpleRegex regex = new SimpleRegex("a.*.*c", false);
+        assertTrue("Test ID 6: 'a.*.*c' deve matchare 'abbc'", regex.matches("abbc"));
+    }
+
+    /**
+     * Test Index: 7
+     * Input: expr="a.*d", target="abce"
+     * Esito Atteso: false
+     * Motivazione: Mancava un caso in cui un '.*' consuma parte della stringa, ma il match fallisce successivamente a causa di un carattere non corrispondente.
+     */
+    @Test
+    public void testMatches_ID7_StarWildcardFailsOnNearMiss() {
+        SimpleRegex regex = new SimpleRegex("a.*d", false);
+        assertFalse("Test ID 7: 'a.*d' non deve matchare 'abce' (near-miss)", regex.matches("abce"));
+    }
+
+    /**
+     * Test Index: 8
+     * Input: expr="abc", target="abcd"
+     * Esito Atteso: false
+     * Motivazione: L'espressione matcha l'inizio della stringa target ma non la sua interezza.
+     */
+    @Test
+    public void testMatches_ID8_NoWildcardFailsOnLongerTarget() {
+        SimpleRegex regex = new SimpleRegex("abc", false);
+        assertFalse("Test ID 8: 'abc' non deve matchare 'abcd' perché il target è più lungo", regex.matches("abcd"));
+    }
+
     //MUTATION TESTING:
 //
 //    @Test
